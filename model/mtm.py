@@ -5,12 +5,12 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 
-from maml.fusions.factory import factory
+from fusions.factory import factory
 from transformers import PreTrainedModel, PreTrainedTokenizer
 
-from maml.text.dataset import MyDataPoint as TextDataPoint, MySentence as TextSentence, MyDataset as TextDataset
-from maml.image.dataset import MyDataPoint as ImageDataPoint, MyImage, MyDataset as ImageDataset
-from maml.data.dataset import MyDataPoint as MMDataPoint, MyPair as MMPair, MyDataset as MMDataset
+from text.dataset import MyDataPoint as TextDataPoint, MySentence as TextSentence, MyDataset as TextDataset
+from image.dataset import MyDataPoint as ImageDataPoint, MyImage, MyDataset as ImageDataset
+from data.dataset import MyDataPoint as MMDataPoint, MyPair as MMPair, MyDataset as MMDataset
 
 
 def _use_cache(module: nn.Module, data_points: List[MMDataPoint]):
@@ -75,17 +75,11 @@ class MTM(nn.Module):
         self.classifier2 = nn.Linear(self.output_dim, 2)
         self.classifier3 = nn.Linear(self.image_fusion_length, 2)
 
-        self.dimensions = {
-            1: [self.hidden_layer],
-            2: [self.hidden_layer, self.hidden_layer],
-            3: [self.hidden_layer, self.hidden_layer, self.hidden_layer],
-        }
-
         self.fusion = factory({
             'type': self.fusion_type,
             'input_dims': [self.sentence_fusion_length, self.image_fusion_length],
             'output_dim': self.output_dim,
-            'dimensions': self.dimensions[self.hidden_layer]
+            'dimensions': [self.hidden_size] * self.hidden_layer
         })
 
         self.device = device
