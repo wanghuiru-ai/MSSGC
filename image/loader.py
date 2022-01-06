@@ -1,5 +1,5 @@
 from pathlib import Path
-from maml.image.dataset import MyImage, MyDataset, MyCorpus
+from image.dataset import MyImage, MyDataset, MyCorpus
 
 
 def load_corpus(path: str, split: int = 1) -> MyCorpus:
