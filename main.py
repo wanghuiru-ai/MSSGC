@@ -11,12 +11,12 @@ from torch.utils.data import DataLoader
 
 from transformers import AutoTokenizer, AutoModel
 
-from maml.data.loader import load_corpus as load_mm_corpus
-from maml.text.loader import load_corpus as load_text_corpus
-from maml.image.loader import load_corpus as load_image_corpus
-from maml.model.resnet import resnet152
-from maml.model.mtm import MTM
-from maml.model.maml import optimize_w_sgd, optimize_w_adam, copy_model_params, update_vs_ss
+from data.loader import load_corpus as load_mm_corpus
+from text.loader import load_corpus as load_text_corpus
+from image.loader import load_corpus as load_image_corpus
+from model.resnet import resnet152
+from model.mtm import MTM
+from model.maml import optimize_w_sgd, optimize_w_adam, copy_model_params, update_vs_ss
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--seed', type=int, default=0)
