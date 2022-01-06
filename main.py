@@ -46,8 +46,6 @@ def seed_everything(seed):
     torch.backends.cudnn.deterministic = True
 
 
-print('loss function: (1 - {}) * mm_loss_first + {} * mm_loss_second'.format(args.senti_weight, args.senti_weight))
-print(args.hidden_size)
 seed_everything(args.seed)
 
 mm_corpus = load_mm_corpus('/home/data1/liuyi/MSD/dataset')
@@ -84,12 +82,6 @@ optimizer = torch.optim.Adam([
     {'params': image_embedding.parameters(), 'lr': args.lr / 100},
 ], weight_decay=args.weight_decay)
 
-ss = []
-vs = []
-for name, params in model.named_parameters():
-    ss.append(torch.zeros_like(params.data))
-    vs.append(torch.zeros_like(params.data))
-
 recalls_TSA, metrics_TSA = [], []
 f1_scores_ISA, metrics_ISA = [], []
 f1_scores_MSD, metrics_MSD = [], []
@@ -119,7 +111,6 @@ for epoch in range(1, args.epochs + 1):
             image_data_loader_iterator = iter(image_data_loader)
             image = next(image_data_loader_iterator)
 
-        # model 1
         text_loss = model.forward_loss_text(text)
         loss_list_TSA.append(text_loss.item())
 
@@ -180,10 +171,6 @@ for epoch in range(1, args.epochs + 1):
 
     del loss3, f1_score_MSD, precision_MSD, recall_MSD, accuracy_MSD
     torch.cuda.empty_cache()
-
-print('loss function: (1 - {}) * mm_loss_first + {} * mm_loss_second'.format(args.senti_weight, args.senti_weight))
-print('linear lr: ', args.lr)
-print('embedding lr: ', args.lr / 100)
 
 print('-----------------------------------------------------')
 print('epoch\tf1_score\tprecision\trecall\t\taccuracy')
