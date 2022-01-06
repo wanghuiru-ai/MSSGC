@@ -34,24 +34,3 @@ def load_dataset(path_dataset: Path, path_image: Path) -> MyDataset:
 
     return MyDataset(images, path_image)
 
-
-def flag_count(dataset: MyDataset) -> str:
-    from collections import Counter
-    flags = [image.flag for image in dataset]
-    counter = Counter(flags)
-    sentences = len(dataset)
-    positives = counter[1]
-    negatives = counter[0]
-    return f'{sentences}\t\t{positives}\t\t{negatives}'
-
-
-if __name__ == "__main__":
-    path = '/mnt/E/ly/MSD/dataset'
-    corpus = load_corpus(path, split=1)
-
-    print('----------------------------------------------------')
-    print('\t\tsentences\tpositives\tnegatives')
-    print('----------------------------------------------------')
-    print('train\t' + flag_count(corpus.train))
-    print('test\t' + flag_count(corpus.test))
-    print('----------------------------------------------------')
