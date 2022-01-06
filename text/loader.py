@@ -1,5 +1,5 @@
 from pathlib import Path
-from maml.text.dataset import MySentence, MyDataset, MyCorpus
+from text.dataset import MySentence, MyDataset, MyCorpus
 
 
 def load_corpus(path: str) -> MyCorpus:
@@ -33,27 +33,3 @@ def load_dataset(path_text: Path) -> MyDataset:
             pairs.append(MySentence(text, sem_dic[flag]))
 
     return MyDataset(pairs)
-
-
-def flag_count(dataset: MyDataset) -> str:
-    from collections import Counter
-    flags = [pair.flag for pair in dataset]
-    counter = Counter(flags)
-    sentences = len(dataset)
-    n = counter[2]
-    positives = counter[1]
-    negatives = counter[0]
-    return f'{sentences}\t\t{positives}\t\t\t{negatives}\t\t{n}'
-
-
-if __name__ == "__main__":
-    path = '/home/data1/liuyi/MSD/dataset'
-    corpus = load_corpus(path)
-
-    print('----------------------------------------------------')
-    print('\t\tsentences\tpositives\tnegatives\tneutral')
-    print('----------------------------------------------------')
-    print('train\t' + flag_count(corpus.train))
-    print('dev\t\t' + flag_count(corpus.dev))
-    print('test\t' + flag_count(corpus.test))
-    print('----------------------------------------------------')
