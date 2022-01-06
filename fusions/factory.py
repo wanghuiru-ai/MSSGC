@@ -1,15 +1,15 @@
 import copy
 # from bootstrap.lib.logger import Logger
-from maml.fusions.fusions import Block
-from maml.fusions.fusions import BlockTucker
-from maml.fusions.fusions import MLB
-from maml.fusions.fusions import MFB
-from maml.fusions.fusions import MFH
-from maml.fusions.fusions import MCB
-from maml.fusions.fusions import Mutan
-from maml.fusions.fusions import Tucker
-from maml.fusions.fusions import LinearSum
-from maml.fusions.fusions import ConcatMLP
+from fusions.fusions import Block
+from fusions.fusions import BlockTucker
+from fusions.fusions import MLB
+from fusions.fusions import MFB
+from fusions.fusions import MFH
+from fusions.fusions import MCB
+from fusions.fusions import Mutan
+from fusions.fusions import Tucker
+from fusions.fusions import LinearSum
+from fusions.fusions import ConcatMLP
 
 
 def factory(opt):
