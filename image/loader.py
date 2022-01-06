@@ -5,9 +5,7 @@ from maml.image.dataset import MyImage, MyDataset, MyCorpus
 def load_corpus(path: str, split: int = 1) -> MyCorpus:
     path = Path(path)
     path_dataset = path / 'Twitter1269'
-    # train_file = 'train_' + str(split) + '.txt'
     train_file = 'train_all.txt'
-    # train_file = 'train_sample.txt'
     test_file = 'test_' + str(split) + '.txt'
 
     path_train = path_dataset / train_file
